@@ -1,0 +1,25 @@
+[package]
+name = "roller"
+version = "0.1.0"
+edition = "2021"
+description = "CLI for the ROLLER REST and Reporting APIs"
+license = "GPL-3.0-or-later"
+
+[dependencies]
+clap = { version = "4.5", features = ["string"] }
+indexmap = { version = "2", features = ["serde"] }
+rpassword = "7"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+serde_yaml = "0.9"
+ureq = { version = "2.12", features = ["json"] }
+
+[target.'cfg(windows)'.dependencies]
+base64 = "0.22"
+windows-sys = { version = "0.59", features = ["Win32_Foundation", "Win32_Security_Cryptography"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+keyring = { version = "3", features = ["apple-native"] }
+
+[profile.release]
+strip = true
